@@ -15,7 +15,7 @@ public class Auto {
 	   private Sound sonidoHerido;
 	   private int vidas = 3;
 	   private int puntos = 0;
-	   private int velx = 400;
+	   private int velx = 1000;
 	   private boolean herido = false;
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
@@ -67,19 +67,12 @@ public class Auto {
 	   
 	   
 	   public void actualizarMovimiento() { 
-		   // movimiento desde mouse/touch
-		   /*if(Gdx.input.isTouched()) {
-			      Vector3 touchPos = new Vector3();
-			      touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-			      camera.unproject(touchPos);
-			      bucket.x = touchPos.x - 64 / 2;
-			}*/
 		   //movimiento desde teclado
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
 		   // que no se salga de los bordes izq y der
-		   if(bucket.x < 0) bucket.x = 0;
-		   if(bucket.x > 800 - 64) bucket.x = 800 - 64;
+		   if(bucket.x < 200) bucket.x = 200;
+		   if(bucket.x > 600 - 64) bucket.x = 600 - 64;
 	   }
 	    
 
