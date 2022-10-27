@@ -18,7 +18,10 @@ public class GameScreen implements Screen {
 	private BitmapFont font;
 	private Auto tarro;
 	private Lluvia lluvia;
-	private Texture background;
+	private Texture background1;
+	private Texture background2;
+	private float yBG;
+	private int bgSpeed = 500;
 
 	   
 	//boolean activo = true;
@@ -36,11 +39,13 @@ public class GameScreen implements Screen {
          Texture gotaMala = new Texture(Gdx.files.internal("dropBad.png"));
          
          // carga de fondo
-         background = new Texture(Gdx.files.internal("backgroundDLC.png"));
+         background1 = new Texture(Gdx.files.internal("backgroundDLC.png"));
+         background2 = new Texture(Gdx.files.internal("backgroundDLC.png"));
+         yBG = 0;
          
          Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
         
-	     Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain2.mp3"));
+	     Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
          lluvia = new Lluvia(gota, gotaMala, dropSound, rainMusic);
 	      
 	      // camera
@@ -62,8 +67,15 @@ public class GameScreen implements Screen {
 		camera.update();
 		//actualizar 
 		batch.setProjectionMatrix(camera.combined);
+		
+		yBG -= bgSpeed * Gdx.graphics.getDeltaTime();
+		if (yBG + 600 <= 0) {
+			yBG = 0;
+		}
+		
 		batch.begin();
-		batch.draw(background,0,0);
+		batch.draw(background1,0,yBG);
+		batch.draw(background2,0,yBG+600);
 		//dibujar textos
 		font.draw(batch, "Gotas totales: " + tarro.getPuntos(), 5, 475);
 		font.draw(batch, "Vidas : " + tarro.getVidas(), 670, 475);
