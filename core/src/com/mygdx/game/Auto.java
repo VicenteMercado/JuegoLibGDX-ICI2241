@@ -45,8 +45,8 @@ public class Auto {
 		      bucket = new Rectangle();
 		      bucket.x = 800 / 2 - 64 / 2;
 		      bucket.y = 20;
-		      bucket.width = 64;
-		      bucket.height = 64;
+		      bucket.width = 72;
+		      bucket.height = 128;
 	   }
 	   public void dañar() {
 		  vidas--;
