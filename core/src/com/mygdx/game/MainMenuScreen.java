@@ -10,12 +10,12 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
 
-	final GameLluviaMenu game;
+	final GameVehiculo game;
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private OrthographicCamera camera;
 
-	public MainMenuScreen(final GameLluviaMenu game) {
+	public MainMenuScreen(final GameVehiculo game) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();

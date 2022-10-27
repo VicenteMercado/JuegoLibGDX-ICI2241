@@ -8,12 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameOverScreen implements Screen {
-	private final GameLluviaMenu game;
+	private final GameVehiculo game;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private OrthographicCamera camera;
 
-	public GameOverScreen(final GameLluviaMenu game) {
+	public GameOverScreen(final GameVehiculo game) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();

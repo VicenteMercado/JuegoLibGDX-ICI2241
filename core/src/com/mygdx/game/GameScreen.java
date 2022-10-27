@@ -11,23 +11,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
-	final GameLluviaMenu game;
+	final GameVehiculo game;
     private OrthographicCamera camera;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
-	private Tarro tarro;
+	private Auto tarro;
 	private Lluvia lluvia;
 
 	   
 	//boolean activo = true;
 
-	public GameScreen(final GameLluviaMenu game) {
+	public GameScreen(final GameVehiculo game) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
 		  // load the images for the droplet and the bucket, 64x64 pixels each 	     
 		  Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.ogg"));
-		  tarro = new Tarro(new Texture(Gdx.files.internal("bucket.png")),hurtSound);
+		  tarro = new Auto(new Texture(Gdx.files.internal("bucket.png")),hurtSound);
          
 	      // load the drop sound effect and the rain background "music" 
          Texture gota = new Texture(Gdx.files.internal("drop.png"));
