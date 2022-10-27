@@ -15,7 +15,7 @@ public class Auto {
 	   private Sound sonidoHerido;
 	   private int vidas = 3;
 	   private int puntos = 0;
-	   private int velx = 1000;
+	   private int velx = 500;
 	   private boolean herido = false;
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
@@ -45,14 +45,14 @@ public class Auto {
 		      bucket = new Rectangle();
 		      bucket.x = 800 / 2 - 64 / 2;
 		      bucket.y = 20;
-		      bucket.width = 72;
-		      bucket.height = 128;
+		      bucket.width = 54;
+		      bucket.height = 96;
 	   }
 	   public void dañar() {
 		  vidas--;
 		  herido = true;
 		  tiempoHerido=tiempoHeridoMax;
-		  sonidoHerido.play();
+		  sonidoHerido.play(0.20f);
 	   }
 	   public void dibujar(SpriteBatch batch) {
 		 if (!herido)  
@@ -71,8 +71,8 @@ public class Auto {
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += velx * Gdx.graphics.getDeltaTime();
 		   // que no se salga de los bordes izq y der
-		   if(bucket.x < 200) bucket.x = 200;
-		   if(bucket.x > 600 - 64) bucket.x = 600 - 64;
+		   if(bucket.x < 135) bucket.x = 135;
+		   if(bucket.x > 675 - 64) bucket.x = 675 - 64;
 	   }
 	    
 

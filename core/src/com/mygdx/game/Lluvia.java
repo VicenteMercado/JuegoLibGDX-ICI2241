@@ -33,6 +33,7 @@ public class Lluvia {
 	      // start the playback of the background music immediately
 	      rainMusic.setLooping(true);
 	      rainMusic.play();
+	      rainMusic.setVolume(0.40f);
 	}
 	
 	private void crearGotaDeLluvia() {
