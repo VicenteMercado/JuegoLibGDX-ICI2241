@@ -73,7 +73,6 @@ public class Lluvia {
 	    	  rainDropsPos.removeIndex(i);
 	          rainDropsType.removeIndex(i);
 	      	}else { // gota a recolectar
-	    	  tarro.sumarPuntos(10);
 	          dropSound.play();
 	          rainDropsPos.removeIndex(i);
 	          rainDropsType.removeIndex(i);

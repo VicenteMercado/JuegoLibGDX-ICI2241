@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
 	final GameVehiculo game;
@@ -20,7 +21,7 @@ public class GameScreen implements Screen {
 	private Lluvia lluvia;
 	private Texture background1;
 	private Texture background2;
-	private float yBG;
+	private float yBG, timeState;
 	private int bgSpeed = 500;
 
 	   
@@ -57,6 +58,8 @@ public class GameScreen implements Screen {
 	      
 	      // creacion de la lluvia
 	      lluvia.crear();
+	      
+	      timeState = 0f;
 	}
 
 	@Override
@@ -97,7 +100,9 @@ public class GameScreen implements Screen {
 		
 		tarro.dibujar(batch);
 		lluvia.actualizarDibujoLluvia(batch);
-		
+		timeState+=Gdx.graphics.getDeltaTime();
+		if (timeState > 0.1f)
+			tarro.sumarPuntos(1);
 		batch.end();
 	}
 

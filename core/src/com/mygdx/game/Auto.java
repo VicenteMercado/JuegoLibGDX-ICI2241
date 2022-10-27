@@ -36,7 +36,7 @@ public class Auto {
 		public Rectangle getArea() {
 			return car;
 		}
-		public void sumarPuntos(int pp) {
+		public void sumarPuntos(long pp) {
 			puntos+=pp;
 		}
 		
