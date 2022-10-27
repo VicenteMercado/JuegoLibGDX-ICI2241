@@ -31,9 +31,9 @@ public class Lluvia {
 		rainDropsType = new Array<Integer>();
 		crearGotaDeLluvia();
 	      // start the playback of the background music immediately
-	      rainMusic.setLooping(true);
-	      rainMusic.play();
-	      rainMusic.setVolume(0.40f);
+	    //rainMusic.setLooping(true);
+	    //rainMusic.play();
+	    //rainMusic.setVolume(0.40f);
 	}
 	
 	private void crearGotaDeLluvia() {

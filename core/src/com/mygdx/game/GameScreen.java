@@ -45,8 +45,12 @@ public class GameScreen implements Screen {
          yBG = 0;
          
          Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
-        
+         
+         //Se inicializa música de fondo, se reproduce y modifica su volúmen.
 	     Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
+	     rainMusic.setLooping(true);
+		 rainMusic.play();
+		 rainMusic.setVolume(0.40f);
          lluvia = new Lluvia(gota, gotaMala, dropSound, rainMusic);
 	      
 	      // camera
