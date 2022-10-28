@@ -24,7 +24,7 @@ public class Items extends Objetos{
 		this.itemRalent = itemRalent;
 		this.soundEscudo = soundEscudo;
 		this.soundRalent = soundRalent;
-		velY = 500;
+		velY = 400;
 	}
     
 	public void crear() {

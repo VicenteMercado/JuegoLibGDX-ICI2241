@@ -24,7 +24,7 @@ public class GameScreen implements Screen {
 	private Texture background1;
 	private Texture background2;
 	private float yBG, timeState;
-	private int bgSpeed = 500;
+	private int bgSpeed = 400;
 	private Music music;
 	private long lastDropTime;
 

@@ -18,7 +18,7 @@ public class Obstaculos extends Objetos{
 	
 	//Constructor de la clase
 	public Obstaculos(Texture ob1, Texture ob2, Texture ob3){
-		velY = 500;
+		velY = 400;
 		this.obstacle1 = ob1;
 		this.obstacle2 = ob2;
 		this.obstacle3 = ob3;
