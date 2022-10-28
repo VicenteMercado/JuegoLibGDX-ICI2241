@@ -25,6 +25,7 @@ public class GameScreen implements Screen {
 	private float yBG, timeState;
 	private int bgSpeed = 500;
 	private Music music;
+	private long lastDropTime;
 
 	public GameScreen(final GameVehiculo game) {
 		this.game = game;
@@ -48,8 +49,10 @@ public class GameScreen implements Screen {
 	    auto.crear();
 	      
 	    // creacion de la lluvia
-	    lluvia.crear();
-	      
+	    //lluvia.crear();
+	    
+	    // creacion de los obstaculos
+	    obstacles.crear();
 	    timeState = 0f;
 	}
 	
@@ -66,10 +69,10 @@ public class GameScreen implements Screen {
 		 
 		 
 		 // load the drop sound effect and the rain background "music" 
-         Texture gota = new Texture(Gdx.files.internal("drop.png"));
+         /*Texture gota = new Texture(Gdx.files.internal("drop.png"));
          Texture gotaMala = new Texture(Gdx.files.internal("dropbad.png"));
          Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
-         lluvia = new Lluvia(gota, gotaMala, dropSound);
+         lluvia = new Lluvia(gota, gotaMala, dropSound);*/
          
          // carga de fondo
          background1 = new Texture(Gdx.files.internal("backgroundDLC.png"));
@@ -104,7 +107,7 @@ public class GameScreen implements Screen {
 			// movimiento del tarro desde teclado
 	        auto.actualizarMovimiento();        
 			// caida de la lluvia 
-	       if (!lluvia.actualizarMovimiento(auto)) {
+	       if (!obstacles.actualizarMovimiento(auto)) {
 	    	  //actualizar HigherScore
 	    	  if (game.getHigherScore()<auto.getPuntos())
 	    		  game.setHigherScore(auto.getPuntos());  
@@ -115,7 +118,7 @@ public class GameScreen implements Screen {
 		}
 		
 		auto.dibujar(batch);
-		lluvia.actualizarDibujoLluvia(batch);
+		obstacles.actualizarDibujoObjeto(batch);
 		timeState+=Gdx.graphics.getDeltaTime();
 		if (timeState > 0.1f)
 			auto.sumarPuntos(1);
@@ -152,7 +155,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void dispose() {
       auto.destruir();
-      lluvia.destruir();
+      obstacles.destruir();
       music.stop();
 	}
 
