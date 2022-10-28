@@ -18,7 +18,6 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private Auto auto;
-	private Lluvia lluvia;
 	private Obstaculos obstacles;
 	private Items items;
 	private Texture background1;
@@ -26,7 +25,6 @@ public class GameScreen implements Screen {
 	private float yBG, timeState;
 	private int bgSpeed = 400;
 	private Music music;
-	private long lastDropTime;
 
 	public GameScreen(final GameVehiculo game) {
 		this.game = game;
@@ -77,12 +75,6 @@ public class GameScreen implements Screen {
 		 Sound soundEscudo = Gdx.audio.newSound(Gdx.files.internal("soundEscudo.ogg"));
 		 Sound soundRalent = Gdx.audio.newSound(Gdx.files.internal("soundRalent.mp3"));
 		 items = new Items(item1,item2,soundEscudo,soundRalent);
-		 
-		 // load the drop sound effect and the rain background "music" 
-         /*Texture gota = new Texture(Gdx.files.internal("drop.png"));
-         Texture gotaMala = new Texture(Gdx.files.internal("dropbad.png"));
-         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
-         lluvia = new Lluvia(gota, gotaMala, dropSound);*/
          
          // carga de fondo
          background1 = new Texture(Gdx.files.internal("backgroundDLC.png"));
@@ -168,6 +160,7 @@ public class GameScreen implements Screen {
 	public void dispose() {
       auto.destruir();
       obstacles.destruir();
+      items.destruir();
       music.stop();
 	}
 

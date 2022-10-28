@@ -88,8 +88,8 @@ public class Items extends Objetos{
 
 	@Override
 	public void destruir() {
-		// TODO Auto-generated method stub
-		
+		soundEscudo.dispose();
+		soundRalent.dispose();
 	}
 
 	@Override
