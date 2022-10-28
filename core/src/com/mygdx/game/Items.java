@@ -53,7 +53,7 @@ public class Items extends Objetos{
 	@Override
 	public boolean actualizarMovimiento(Auto auto) {
 		//Generar un item.
-		if(TimeUtils.nanoTime() - lastItemTime > 500000000) 
+		if(TimeUtils.nanoTime() - lastItemTime > 10000000000.0f) 
 			crearObjeto();
 		
 		for(int i = 0; i < itemPos.size; i++) {

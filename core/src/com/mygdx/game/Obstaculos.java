@@ -62,7 +62,7 @@ public class Obstaculos extends Objetos{
 	@Override
 	public boolean actualizarMovimiento(Auto auto) {
 		//generar obstaculo
-		if (TimeUtils.nanoTime() - lastObstacleTime > 250000000) crearObjeto();
+		if (TimeUtils.nanoTime() - lastObstacleTime > 500000000) crearObjeto();
 		
 		// revisar si las gotas cayeron al suelo o chocaron con el tarro
 		for (int i = 0; i < obstaculosPos.size; i++) {
