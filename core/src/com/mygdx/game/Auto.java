@@ -19,6 +19,7 @@ public class Auto {
 	   private boolean herido = false;
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
+	   private float invencible = 0;
 	   
 	   
 	   public Auto(Texture tex, Sound ss) {
@@ -40,6 +41,14 @@ public class Auto {
 			puntos+=pp;
 		}
 		
+		public float getInvencible() {
+			return invencible;
+		}
+		
+		public void setInvencible(float sec) {
+			invencible = sec;
+		}
+		
 	
 	   public void crear() {
 		      car = new Rectangle();
@@ -49,18 +58,25 @@ public class Auto {
 		      car.height = 96;
 	   }
 	   public void dañar() {
-		  vidas--;
-		  herido = true;
-		  tiempoHerido=tiempoHeridoMax;
-		  sonidoHerido.play(0.15f);
+		  if(invencible == 0) {
+			  vidas--;
+			  herido = true;
+			  tiempoHerido=tiempoHeridoMax;
+			  sonidoHerido.play(0.15f);
+		  }
 	   }
 	   public void dibujar(SpriteBatch batch) {
-		 if (!herido)  
-		   batch.draw(bucketImage, car.x, car.y);
+		 if(invencible != 0) {
+			 batch.setColor(0.5f,0.5f,0.5f,1.0f);
+		 }
 		 else {
-		   batch.draw(bucketImage, car.x, car.y+ MathUtils.random(-5,5));
-		   tiempoHerido--;
-		   if (tiempoHerido<=0) herido = false;
+			 if (!herido)  
+				   batch.draw(bucketImage, car.x, car.y);
+				 else {
+				   batch.draw(bucketImage, car.x, car.y+ MathUtils.random(-5,5));
+				   tiempoHerido--;
+				   if (tiempoHerido<=0) herido = false;
+				 } 
 		 }
 	   } 
 	   

@@ -11,31 +11,23 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public abstract class Objetos {
-	private Array<Rectangle> objectPos; 
-	private Array<Integer> objectType;
-	private long lastObjectTime;
+	private int velY;
 	private Texture objectTexture;
 	private Sound objectSound;
 	
-	public Objetos(Texture objetoEnCarretera, Sound ss) {
-		objectSound = ss;
-		objectTexture = objetoEnCarretera;
-	}
-	
 	public void crear(){
-		objectPos = new Array<Rectangle>();
-		objectType = new Array<Integer>();
 		crearObjeto();
 		
 	}
 	
 	public abstract void crearObjeto();
 	
-	public abstract boolean actualizarMovimiento();
+	public abstract boolean actualizarMovimiento(Auto auto);
 	
 	public void dispose() {
 		objectSound.dispose();
 	}
+
 	
 	
 }
