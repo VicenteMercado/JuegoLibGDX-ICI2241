@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +14,7 @@ public class GameOverScreen implements Screen {
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private OrthographicCamera camera;
+	private Music music;
 
 	public GameOverScreen(final GameVehiculo game) {
 		this.game = game;
@@ -20,6 +22,10 @@ public class GameOverScreen implements Screen {
         this.font = game.getFont();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
+		this.music = Gdx.audio.newMusic(Gdx.files.internal("gameover.mp3"));
+		music.setLooping(false);
+		music.play();
+		music.setVolume(0.40f);
 	}
 
 	@Override
@@ -71,8 +77,7 @@ public class GameOverScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		music.stop();
 	}
 
 }
