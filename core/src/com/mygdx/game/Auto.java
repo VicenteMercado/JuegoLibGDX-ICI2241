@@ -47,7 +47,9 @@ public class Auto {
 		
 		public void setInvencible(float sec) {
 			invencible = sec;
+			
 		}
+		
 		
 	
 	   public void crear() {
@@ -58,7 +60,7 @@ public class Auto {
 		      car.height = 96;
 	   }
 	   public void dañar() {
-		  if(invencible == 0) {
+		  if(invencible <= 0) {
 			  vidas--;
 			  herido = true;
 			  tiempoHerido=tiempoHeridoMax;
@@ -66,8 +68,13 @@ public class Auto {
 		  }
 	   }
 	   public void dibujar(SpriteBatch batch) {
-		 if(invencible != 0) {
-			 batch.setColor(0.5f,0.5f,0.5f,1.0f);
+		 if(invencible > 0) {
+			 invencible -= Gdx.graphics.getDeltaTime();
+			 
+			 float f = (System.currentTimeMillis()%100)/100;
+			 batch.setColor(f,1-f,f,1.0f);
+			 batch.draw(carImage, car.x, car.y);
+			 batch.setColor(1f,1f,1f,1.0f);
 		 }
 		 else {
 			 if (!herido)  

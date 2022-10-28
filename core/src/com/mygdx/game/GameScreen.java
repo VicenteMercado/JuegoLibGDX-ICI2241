@@ -20,6 +20,7 @@ public class GameScreen implements Screen {
 	private Auto auto;
 	private Lluvia lluvia;
 	private Obstaculos obstacles;
+	private Items items;
 	private Texture background1;
 	private Texture background2;
 	private float yBG, timeState;
@@ -54,6 +55,9 @@ public class GameScreen implements Screen {
 	    // creacion de los obstaculos
 	    obstacles.crear();
 	    timeState = 0f;
+	    
+	    //Creación de los items.
+	    items.crear();
 	}
 	
 	private void cargar() {
@@ -67,6 +71,12 @@ public class GameScreen implements Screen {
 		 Texture obstacle3 = new Texture(Gdx.files.internal("obstacle3.png"));
 		 obstacles = new Obstaculos(obstacle1, obstacle2, obstacle3);
 		 
+		 //Carga de texturas de items y sonidos de efecto.
+		 Texture item1 = new Texture(Gdx.files.internal("item1.jpg"));
+		 Texture item2 = new Texture(Gdx.files.internal("item2.png"));
+		 Sound soundEscudo = Gdx.audio.newSound(Gdx.files.internal("soundEscudo.ogg"));
+		 Sound soundRalent = Gdx.audio.newSound(Gdx.files.internal("soundRalent.mp3"));
+		 items = new Items(item1,item2,soundEscudo,soundRalent);
 		 
 		 // load the drop sound effect and the rain background "music" 
          /*Texture gota = new Texture(Gdx.files.internal("drop.png"));
@@ -105,7 +115,8 @@ public class GameScreen implements Screen {
 		
 		if (!auto.estaHerido()) {
 			// movimiento del tarro desde teclado
-	        auto.actualizarMovimiento();        
+	        auto.actualizarMovimiento();
+	        items.actualizarMovimiento(auto);
 			// caida de la lluvia 
 	       if (!obstacles.actualizarMovimiento(auto)) {
 	    	  //actualizar HigherScore
@@ -119,6 +130,7 @@ public class GameScreen implements Screen {
 		
 		auto.dibujar(batch);
 		obstacles.actualizarDibujoObjeto(batch);
+		items.actualizarDibujoObjeto(batch);
 		timeState+=Gdx.graphics.getDeltaTime();
 		if (timeState > 0.1f)
 			auto.sumarPuntos(1);

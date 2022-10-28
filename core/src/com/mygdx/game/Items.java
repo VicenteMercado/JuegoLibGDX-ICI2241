@@ -24,8 +24,15 @@ public class Items extends Objetos{
 		this.itemRalent = itemRalent;
 		this.soundEscudo = soundEscudo;
 		this.soundRalent = soundRalent;
+		velY = 500;
 	}
-
+    
+	public void crear() {
+		itemPos = new Array<Rectangle>();
+		itemType = new Array<Integer>();
+		crearObjeto();
+	}
+	
 	@Override
 	public void crearObjeto() {
 		Rectangle item = new Rectangle();
@@ -46,12 +53,12 @@ public class Items extends Objetos{
 	@Override
 	public boolean actualizarMovimiento(Auto auto) {
 		//Generar un item.
-		if(TimeUtils.nanoTime() - lastItemTime > 100000000) 
+		if(TimeUtils.nanoTime() - lastItemTime > 500000000) 
 			crearObjeto();
 		
 		for(int i = 0; i < itemPos.size; i++) {
 			Rectangle item = itemPos.get(i);
-			item.y -=300 * Gdx.graphics.getDeltaTime();
+			item.y -=velY * Gdx.graphics.getDeltaTime();
 			//Si sale de la parte inferior de la pantalla, se elimina.
 			if (item.y + 64 < 0) {
 				itemPos.removeIndex(i);
@@ -66,6 +73,13 @@ public class Items extends Objetos{
 			         itemType.removeIndex(i);
 			         auto.setInvencible(5);
 				 }
+				 if(itemType.get(i)==2) { //Modo ralentizador
+					 soundRalent.play();
+			         itemPos.removeIndex(i);
+			         itemType.removeIndex(i);
+			         
+			         //FALTA IMPLEMENTAR EFECTO DEL RALENTIZADOR.
+				 }
 		    }
 		      
 		}
@@ -75,6 +89,19 @@ public class Items extends Objetos{
 	@Override
 	public void destruir() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizarDibujoObjeto(SpriteBatch batch) {
+		//se dibuja la textura del item dependiendo de cuál toque
+		for (int i = 0; i < itemPos.size; i++) {
+			Rectangle item = itemPos.get(i);
+			if (itemType.get(i) == 1)
+				batch.draw(itemEscudo, item.x, item.y);
+			if (itemType.get(i) == 2)
+				batch.draw(itemRalent, item.x, item.y);
+		}
 		
 	}
 }
