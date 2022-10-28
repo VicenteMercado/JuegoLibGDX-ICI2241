@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class Items extends Objetos{
+<<<<<<< Updated upstream
 	private long lastItemTime;
 	private Array<Integer> itemType;
 	private Array<Rectangle> itemPos;
@@ -24,10 +25,17 @@ public class Items extends Objetos{
 		this.itemRalent = itemRalent;
 		this.soundEscudo = soundEscudo;
 		this.soundRalent = soundRalent;
+=======
+
+	public Items(Texture objetoEnCarretera, Sound ss) {
+		super(objetoEnCarretera, ss);
+		// TODO Auto-generated constructor stub
+>>>>>>> Stashed changes
 	}
 
 	@Override
 	public void crearObjeto() {
+<<<<<<< Updated upstream
 		Rectangle item = new Rectangle();
 		item.x = MathUtils.random(0,800-64);
 		item.y = 480;
@@ -70,6 +78,16 @@ public class Items extends Objetos{
 		      
 		}
 		return true;
+=======
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean actualizarMovimiento() {
+		// TODO Auto-generated method stub
+		return false;
+>>>>>>> Stashed changes
 	}
 
 }

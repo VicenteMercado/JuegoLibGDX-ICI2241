@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Auto {
 	   private Rectangle car;
-	   private Texture bucketImage;
+	   private Texture carImage;
 	   private Sound sonidoHerido;
 	   private int vidas = 3;
 	   private int puntos = 0;
@@ -23,7 +23,7 @@ public class Auto {
 	   
 	   
 	   public Auto(Texture tex, Sound ss) {
-		   bucketImage = tex;
+		   carImage = tex;
 		   sonidoHerido = ss;
 	   }
 	   
@@ -66,6 +66,7 @@ public class Auto {
 		  }
 	   }
 	   public void dibujar(SpriteBatch batch) {
+<<<<<<< Updated upstream
 		 if(invencible != 0) {
 			 batch.setColor(0.5f,0.5f,0.5f,1.0f);
 		 }
@@ -77,6 +78,14 @@ public class Auto {
 				   tiempoHerido--;
 				   if (tiempoHerido<=0) herido = false;
 				 } 
+=======
+		 if (!herido)  
+		   batch.draw(carImage, car.x, car.y);
+		 else {
+		   batch.draw(carImage, car.x, car.y+ MathUtils.random(-5,5));
+		   tiempoHerido--;
+		   if (tiempoHerido<=0) herido = false;
+>>>>>>> Stashed changes
 		 }
 	   } 
 	   
@@ -92,7 +101,7 @@ public class Auto {
 	    
 
 	public void destruir() {
-		    bucketImage.dispose();
+		    carImage.dispose();
 	   }
 	
    public boolean estaHerido() {

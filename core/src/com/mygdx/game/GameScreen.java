@@ -17,53 +17,64 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
-	private Auto tarro;
+	private Auto auto;
 	private Lluvia lluvia;
+	private Obstaculos obstacles;
 	private Texture background1;
 	private Texture background2;
 	private float yBG, timeState;
 	private int bgSpeed = 500;
-
-	   
-	//boolean activo = true;
+	private Music music;
 
 	public GameScreen(final GameVehiculo game) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
-		  // load the images for the droplet and the bucket, 64x64 pixels each 	     
-		  Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.wav"));
-		  tarro = new Auto(new Texture(Gdx.files.internal("bucket.png")),hurtSound);
-         
-	      // load the drop sound effect and the rain background "music" 
+        
+        //Se cargan los assets
+        cargar();
+		  
+        //Se inicializa música de fondo, se reproduce y modifica su volúmen.
+	    this.music = Gdx.audio.newMusic(Gdx.files.internal("game_music.mp3"));
+	    music.setLooping(true);
+		music.play();
+		music.setVolume(0.40f);
+		
+	    // camera
+	    camera = new OrthographicCamera();
+	    camera.setToOrtho(false, 800, 480);
+	    batch = new SpriteBatch();
+	    // creacion del tarro
+	    auto.crear();
+	      
+	    // creacion de la lluvia
+	    lluvia.crear();
+	      
+	    timeState = 0f;
+	}
+	
+	private void cargar() {
+		 //carga la textura del auto y su sonido de daño	     
+		 Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.wav"));
+		 auto = new Auto(new Texture(Gdx.files.internal("car.png")),hurtSound);
+		 
+		 //carga las texturas de los obstáculos
+		 Texture obstacle1 = new Texture(Gdx.files.internal("obstacle1.png"));
+		 Texture obstacle2 = new Texture(Gdx.files.internal("obstacle2.png"));
+		 Texture obstacle3 = new Texture(Gdx.files.internal("obstacle3.png"));
+		 obstacles = new Obstaculos(obstacle1, obstacle2, obstacle3);
+		 
+		 
+		 // load the drop sound effect and the rain background "music" 
          Texture gota = new Texture(Gdx.files.internal("drop.png"));
-         Texture gotaMala = new Texture(Gdx.files.internal("dropBad.png"));
+         Texture gotaMala = new Texture(Gdx.files.internal("dropbad.png"));
+         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
+         lluvia = new Lluvia(gota, gotaMala, dropSound);
          
          // carga de fondo
          background1 = new Texture(Gdx.files.internal("backgroundDLC.png"));
          background2 = new Texture(Gdx.files.internal("backgroundDLC.png"));
          yBG = 0;
-         
-         Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
-         
-         //Se inicializa música de fondo, se reproduce y modifica su volúmen.
-	     Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-	     rainMusic.setLooping(true);
-		 rainMusic.play();
-		 rainMusic.setVolume(0.40f);
-         lluvia = new Lluvia(gota, gotaMala, dropSound, rainMusic);
-	      
-	      // camera
-	      camera = new OrthographicCamera();
-	      camera.setToOrtho(false, 800, 480);
-	      batch = new SpriteBatch();
-	      // creacion del tarro
-	      tarro.crear();
-	      
-	      // creacion de la lluvia
-	      lluvia.crear();
-	      
-	      timeState = 0f;
 	}
 
 	@Override
@@ -75,6 +86,7 @@ public class GameScreen implements Screen {
 		//actualizar 
 		batch.setProjectionMatrix(camera.combined);
 		
+		// se genera el scroll del fondo
 		yBG -= bgSpeed * Gdx.graphics.getDeltaTime();
 		if (yBG + 600 <= 0) {
 			yBG = 0;
@@ -84,29 +96,29 @@ public class GameScreen implements Screen {
 		batch.draw(background1,0,yBG);
 		batch.draw(background2,0,yBG+600);
 		//dibujar textos
-		font.draw(batch, "Gotas totales: " + tarro.getPuntos(), 5, 475);
-		font.draw(batch, "Vidas : " + tarro.getVidas(), 670, 475);
+		font.draw(batch, "Puntaje: " + auto.getPuntos(), 5, 475);
+		font.draw(batch, "Vidas : " + auto.getVidas(), 670, 475);
 		font.draw(batch, "HighScore : " + game.getHigherScore(), camera.viewportWidth/2-50, 475);
 		
-		if (!tarro.estaHerido()) {
+		if (!auto.estaHerido()) {
 			// movimiento del tarro desde teclado
-	        tarro.actualizarMovimiento();        
+	        auto.actualizarMovimiento();        
 			// caida de la lluvia 
-	       if (!lluvia.actualizarMovimiento(tarro)) {
+	       if (!lluvia.actualizarMovimiento(auto)) {
 	    	  //actualizar HigherScore
-	    	  if (game.getHigherScore()<tarro.getPuntos())
-	    		  game.setHigherScore(tarro.getPuntos());  
+	    	  if (game.getHigherScore()<auto.getPuntos())
+	    		  game.setHigherScore(auto.getPuntos());  
 	    	  //ir a la ventana de finde juego y destruir la actual
 	    	  game.setScreen(new GameOverScreen(game));
 	    	  dispose();
 	       }
 		}
 		
-		tarro.dibujar(batch);
+		auto.dibujar(batch);
 		lluvia.actualizarDibujoLluvia(batch);
 		timeState+=Gdx.graphics.getDeltaTime();
 		if (timeState > 0.1f)
-			tarro.sumarPuntos(1);
+			auto.sumarPuntos(1);
 		batch.end();
 	}
 
@@ -117,7 +129,8 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 	  // continuar con sonido de lluvia
-	  lluvia.continuar();
+	  music.play();
+	  music.setVolume(0.40f);
 	}
 
 	@Override
@@ -127,7 +140,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void pause() {
-		lluvia.pausar();
+		music.stop();
 		game.setScreen(new PausaScreen(game, this)); 
 	}
 
@@ -138,9 +151,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-      tarro.destruir();
+      auto.destruir();
       lluvia.destruir();
-
+      music.stop();
 	}
 
 }

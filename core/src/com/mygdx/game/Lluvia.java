@@ -17,10 +17,8 @@ public class Lluvia {
     private Texture gotaBuena;
     private Texture gotaMala;
     private Sound dropSound;
-    private Music rainMusic;
 	   
-	public Lluvia(Texture gotaBuena, Texture gotaMala, Sound ss, Music mm) {
-		rainMusic = mm;
+	public Lluvia(Texture gotaBuena, Texture gotaMala, Sound ss) {
 		dropSound = ss;
 		this.gotaBuena = gotaBuena;
 		this.gotaMala = gotaMala;
@@ -30,15 +28,11 @@ public class Lluvia {
 		rainDropsPos = new Array<Rectangle>();
 		rainDropsType = new Array<Integer>();
 		crearGotaDeLluvia();
-	      // start the playback of the background music immediately
-	    //rainMusic.setLooping(true);
-	    //rainMusic.play();
-	    //rainMusic.setVolume(0.40f);
 	}
 	
 	private void crearGotaDeLluvia() {
 	      Rectangle raindrop = new Rectangle();
-	      raindrop.x = MathUtils.random(0, 800-64);
+	      raindrop.x = MathUtils.random(135, 675-64);
 	      raindrop.y = 480;
 	      raindrop.width = 64;
 	      raindrop.height = 64;
@@ -51,11 +45,10 @@ public class Lluvia {
 	      lastDropTime = TimeUtils.nanoTime();
 	   }
 	
-   public boolean actualizarMovimiento(Auto tarro) { 
+   public boolean actualizarMovimiento(Auto auto) { 
 	   // generar gotas de lluvia 
 	   if(TimeUtils.nanoTime() - lastDropTime > 100000000) crearGotaDeLluvia();
-	  
-	   
+
 	   // revisar si las gotas cayeron al suelo o chocaron con el tarro
 	   for (int i=0; i < rainDropsPos.size; i++ ) {
 		  Rectangle raindrop = rainDropsPos.get(i);
@@ -65,10 +58,10 @@ public class Lluvia {
 	    	  rainDropsPos.removeIndex(i); 
 	    	  rainDropsType.removeIndex(i);
 	      }
-	      if(raindrop.overlaps(tarro.getArea())) { //la gota choca con el tarro
+	      if(raindrop.overlaps(auto.getArea())) { //la gota choca con el tarro
 	    	if(rainDropsType.get(i)==1) { // gota dañina
-	    	  tarro.dañar();
-	    	  if (tarro.getVidas()<=0)
+	    	  auto.dañar();
+	    	  if (auto.getVidas()<=0)
 	    		 return false; // si se queda sin vidas retorna falso /game over
 	    	  rainDropsPos.removeIndex(i);
 	          rainDropsType.removeIndex(i);
@@ -94,13 +87,5 @@ public class Lluvia {
    }
    public void destruir() {
       dropSound.dispose();
-      rainMusic.dispose();
    }
-   public void pausar() {
-	  rainMusic.stop();
-   }
-   public void continuar() {
-	  rainMusic.play();
-   }
-   
 }
