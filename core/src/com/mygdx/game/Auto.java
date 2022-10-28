@@ -66,26 +66,17 @@ public class Auto {
 		  }
 	   }
 	   public void dibujar(SpriteBatch batch) {
-<<<<<<< Updated upstream
 		 if(invencible != 0) {
 			 batch.setColor(0.5f,0.5f,0.5f,1.0f);
 		 }
 		 else {
 			 if (!herido)  
-				   batch.draw(bucketImage, car.x, car.y);
+				   batch.draw(carImage, car.x, car.y);
 				 else {
-				   batch.draw(bucketImage, car.x, car.y+ MathUtils.random(-5,5));
+				   batch.draw(carImage, car.x, car.y+ MathUtils.random(-5,5));
 				   tiempoHerido--;
 				   if (tiempoHerido<=0) herido = false;
 				 } 
-=======
-		 if (!herido)  
-		   batch.draw(carImage, car.x, car.y);
-		 else {
-		   batch.draw(carImage, car.x, car.y+ MathUtils.random(-5,5));
-		   tiempoHerido--;
-		   if (tiempoHerido<=0) herido = false;
->>>>>>> Stashed changes
 		 }
 	   } 
 	   

@@ -51,11 +51,11 @@ public class Obstaculos extends Objetos{
 			obstaculo.height = 50;
 			obstaculosPos.add(obstaculo);
 		}
-		lastDropTime = TimeUtils.nanoTime()
+		//lastDropTime = TimeUtils.nanoTime();
 	}
 
 	@Override
-	public boolean actualizarMovimiento() {
+	public boolean actualizarMovimiento(Auto auto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
