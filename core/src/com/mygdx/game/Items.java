@@ -36,7 +36,7 @@ public class Items extends Objetos{
 	@Override
 	public void crearObjeto() {
 		Rectangle item = new Rectangle();
-		item.x = MathUtils.random(0,800-64);
+		item.x = MathUtils.random(135,675-64);
 		item.y = 480;
 		item.width = 64;
 		item.height = 64;
@@ -73,7 +73,7 @@ public class Items extends Objetos{
 			         itemType.removeIndex(i);
 			         auto.setInvencible(5);
 				 }
-				 if(itemType.get(i)==2) { //Modo ralentizador
+				 else{ //Modo ralentizador
 					 soundRalent.play();
 			         itemPos.removeIndex(i);
 			         itemType.removeIndex(i);
