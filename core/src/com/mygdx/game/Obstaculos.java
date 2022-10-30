@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Obstaculos extends Objetos{
+public class Obstaculos extends Objetos implements SPEEDABLE{
 	private Array<Rectangle> obstaculosPos;
 	private Array<Integer> obstaculosType;
 	private Texture obstacle1, obstacle2, obstacle3;
@@ -102,5 +102,17 @@ public class Obstaculos extends Objetos{
 	@Override
 	public void destruir() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void normalizar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ralentizar() {
+		// TODO Auto-generated method stub
+		
 	}
 }

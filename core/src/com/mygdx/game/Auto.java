@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Auto {
+public class Auto implements SPEEDABLE {
 	   private Rectangle car;
 	   private Texture carImage;
 	   private Sound sonidoHerido;
@@ -20,7 +20,7 @@ public class Auto {
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
 	   private float invencible = 0;
-	   private float ralentizador = 0;
+	   private int velocidad = NORMAL;
 	   
 	   
 	   public Auto(Texture tex, Sound ss) {
@@ -51,32 +51,23 @@ public class Auto {
 			
 		}
 		
-		public float getRalentizador() {
-			return ralentizador;
-		}
-		
-		public void setRalentizador(float sec) {
-			ralentizador = sec;
-		}
-		
-		
 	
-	   public void crear() {
+		public void crear() {
 		      car = new Rectangle();
 		      car.x = 800 / 2 - 64 / 2;
 		      car.y = 20;
 		      car.width = 54;
 		      car.height = 96;
-	   }
-	   public void dañar() {
+		}
+		public void dañar() {
 		  if(invencible <= 0) {
 			  vidas--;
 			  herido = true;
 			  tiempoHerido=tiempoHeridoMax;
 			  sonidoHerido.play(0.15f);
 		  }
-	   }
-	   public void dibujar(SpriteBatch batch) {
+		}
+		public void dibujar(SpriteBatch batch) {
 		 if(invencible > 0) {
 			 invencible -= Gdx.graphics.getDeltaTime();
 			 
@@ -94,25 +85,37 @@ public class Auto {
 				   if (tiempoHerido<=0) herido = false;
 				 } 
 		 }
-	   } 
+		} 
 	   
 	   
-	   public void actualizarMovimiento() { 
+		public void actualizarMovimiento() { 
 		   //movimiento desde teclado
 		   if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) car.x -= velx * Gdx.graphics.getDeltaTime();
 		   if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) car.x += velx * Gdx.graphics.getDeltaTime();
 		   // que no se salga de los bordes izq y der
 		   if(car.x < 135) car.x = 135;
 		   if(car.x > 675 - 64) car.x = 675 - 64;
-	   }
+		}
 	    
 
-	public void destruir() {
+		public void destruir() {
 		    carImage.dispose();
-	   }
+		}
 	
-   public boolean estaHerido() {
-	   return herido;
-   }
+		public boolean estaHerido() {
+		   return herido;
+		}
+		
+		public float getVelocidad() {
+			return velocidad;
+		}
+
+		public void normalizar() {
+		   velocidad = SPEEDABLE.NORMAL;
+		}
+	   
+		public void ralentizar() {
+		   velocidad = SPEEDABLE.LENTO;
+		}
 	   
 }

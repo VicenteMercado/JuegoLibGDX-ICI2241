@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Items extends Objetos{
+public class Items extends Objetos implements SPEEDABLE{
 	private long lastItemTime;
 	private Array<Integer> itemType;
 	private Array<Rectangle> itemPos;
@@ -77,9 +77,7 @@ public class Items extends Objetos{
 					 soundRalent.play();
 			         itemPos.removeIndex(i);
 			         itemType.removeIndex(i);
-			         auto.setRalentizador(5);
-			         
-			         //FALTA IMPLEMENTAR EFECTO DEL RALENTIZADOR.
+			         //auto.setRalentizador(5);
 				 }
 		    }
 		      
@@ -103,6 +101,18 @@ public class Items extends Objetos{
 			if (itemType.get(i) == 2)
 				batch.draw(itemRalent, item.x, item.y);
 		}
+		
+	}
+
+	@Override
+	public void normalizar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ralentizar() {
+		// TODO Auto-generated method stub
 		
 	}
 }
