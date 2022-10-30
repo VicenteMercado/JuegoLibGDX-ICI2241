@@ -20,6 +20,7 @@ public class Auto {
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
 	   private float invencible = 0;
+	   private float ralentizador = 0;
 	   
 	   
 	   public Auto(Texture tex, Sound ss) {
@@ -48,6 +49,14 @@ public class Auto {
 		public void setInvencible(float sec) {
 			invencible = sec;
 			
+		}
+		
+		public float getRalentizador() {
+			return ralentizador;
+		}
+		
+		public void setRalentizador(float sec) {
+			ralentizador = sec;
 		}
 		
 		

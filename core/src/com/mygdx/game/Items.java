@@ -77,6 +77,7 @@ public class Items extends Objetos{
 					 soundRalent.play();
 			         itemPos.removeIndex(i);
 			         itemType.removeIndex(i);
+			         auto.setRalentizador(5);
 			         
 			         //FALTA IMPLEMENTAR EFECTO DEL RALENTIZADOR.
 				 }
