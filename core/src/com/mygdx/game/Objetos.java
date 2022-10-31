@@ -7,7 +7,7 @@ public abstract class Objetos {
 	
 	public abstract void crearObjeto();
 	
-	public abstract boolean actualizarMovimiento(Auto auto);
+	public abstract boolean actualizarMovimiento(Auto auto, Obstaculos obstacle);
 	
 	public abstract void actualizarDibujoObjeto(SpriteBatch batch);
 	

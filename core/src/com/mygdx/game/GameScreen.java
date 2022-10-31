@@ -108,9 +108,9 @@ public class GameScreen implements Screen {
 		if (!auto.estaHerido()) {
 			// movimiento del tarro desde teclado
 	        auto.actualizarMovimiento();
-	        items.actualizarMovimiento(auto);
+	        items.actualizarMovimiento(auto, obstacles);
 			// caida de la lluvia 
-	       if (!obstacles.actualizarMovimiento(auto)) {
+	       if (!obstacles.actualizarMovimiento(auto, obstacles)) {
 	    	  //actualizar HigherScore
 	    	  if (game.getHigherScore()<auto.getPuntos())
 	    		  game.setHigherScore(auto.getPuntos());  

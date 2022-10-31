@@ -8,12 +8,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Obstaculos extends Objetos implements SPEEDABLE{
+public class Obstaculos extends Objetos implements Speedable{
 	private Array<Rectangle> obstaculosPos;
 	private Array<Integer> obstaculosType;
 	private Texture obstacle1, obstacle2, obstacle3;
 	private long lastObstacleTime;
-	private int estadoVelObs = NORMAL;
+	private float estadoVelObs = NORMAL;
 	
 	//Constructor de la clase
 	public Obstaculos(Texture ob1, Texture ob2, Texture ob3){
@@ -61,14 +61,14 @@ public class Obstaculos extends Objetos implements SPEEDABLE{
 	}
 
 	@Override
-	public boolean actualizarMovimiento(Auto auto) {
+	public boolean actualizarMovimiento(Auto auto, Obstaculos o) {
 		//generar obstaculo
 		if (TimeUtils.nanoTime() - lastObstacleTime > 500000000) crearObjeto();
 		
 		// revisar si las gotas cayeron al suelo o chocaron con el tarro
 		for (int i = 0; i < obstaculosPos.size; i++) {
 			Rectangle obstacle = obstaculosPos.get(i);
-			if(estadoVelObs != NORMAL) {
+			if(estadoVelObs > NORMAL) {
 				velY = 200;
 			    estadoVelObs -= Gdx.graphics.getDeltaTime();
 			}
@@ -110,17 +110,16 @@ public class Obstaculos extends Objetos implements SPEEDABLE{
 
 	@Override
 	public void destruir() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void normalizar() {
-		estadoVelObs = SPEEDABLE.NORMAL;
 		
 	}
 
 	@Override
+	public void normalizar() {
+		estadoVelObs = Speedable.NORMAL;
+	}
+
+	@Override
 	public void ralentizar() {
-		estadoVelObs = SPEEDABLE.LENTO;
+		estadoVelObs = Speedable.LENTO;
 	}
 }

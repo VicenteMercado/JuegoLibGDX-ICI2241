@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Auto implements SPEEDABLE {
+public class Auto {
 	   private Rectangle car;
 	   private Texture carImage;
 	   private Sound sonidoHerido;
@@ -20,7 +20,6 @@ public class Auto implements SPEEDABLE {
 	   private int tiempoHeridoMax=50;
 	   private int tiempoHerido;
 	   private float invencible = 0;
-	   private int velocidad = NORMAL;
 	   
 	   
 	   public Auto(Texture tex, Sound ss) {
@@ -105,17 +104,4 @@ public class Auto implements SPEEDABLE {
 		public boolean estaHerido() {
 		   return herido;
 		}
-		
-		public float getVelocidad() {
-			return velocidad;
-		}
-
-		public void normalizar() {
-		   velocidad = SPEEDABLE.NORMAL;
-		}
-	   
-		public void ralentizar() {
-		   velocidad = SPEEDABLE.LENTO;
-		}
-	   
 }

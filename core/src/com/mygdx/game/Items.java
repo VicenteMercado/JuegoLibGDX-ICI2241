@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Items extends Objetos implements SPEEDABLE{
+public class Items extends Objetos implements Speedable{
 	private long lastItemTime;
 	private Array<Integer> itemType;
 	private Array<Rectangle> itemPos;
@@ -18,7 +18,7 @@ public class Items extends Objetos implements SPEEDABLE{
 	private Sound soundEscudo;
 	private Texture itemRalent;
 	private Sound soundRalent;
-	private int estadoVelItem = NORMAL;
+	private float estadoVelItem = NORMAL;
 	
 	public Items(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) {
 		this.itemEscudo = itemEscudo;
@@ -26,6 +26,10 @@ public class Items extends Objetos implements SPEEDABLE{
 		this.soundEscudo = soundEscudo;
 		this.soundRalent = soundRalent;
 		velY = 400;
+	}
+	
+	public float getEstado() {
+		return estadoVelItem;
 	}
     
 	public void crear() {
@@ -52,19 +56,20 @@ public class Items extends Objetos implements SPEEDABLE{
 	}
 
 	@Override
-	public boolean actualizarMovimiento(Auto auto) {
+	public boolean actualizarMovimiento(Auto auto, Obstaculos o) {
 		//Generar un item.
 		if(TimeUtils.nanoTime() - lastItemTime > 10000000000.0f) 
 			crearObjeto();
 		
 		for(int i = 0; i < itemPos.size; i++) {
 			Rectangle item = itemPos.get(i);
-			if(estadoVelItem != NORMAL) {
+			if(estadoVelItem > NORMAL) {
 				velY = 200;
 			    estadoVelItem -= Gdx.graphics.getDeltaTime();
 			}
 			else {
 			    normalizar();
+			    o.normalizar();
 			    velY = 400;
 			}
 			item.y -=velY * Gdx.graphics.getDeltaTime();
@@ -86,6 +91,7 @@ public class Items extends Objetos implements SPEEDABLE{
 					 soundRalent.play();
 			         itemPos.removeIndex(i);
 			         itemType.removeIndex(i);
+			         o.ralentizar();
 			         ralentizar();
 				 }
 		    }
@@ -115,12 +121,12 @@ public class Items extends Objetos implements SPEEDABLE{
 
 	@Override
 	public void normalizar() {
-		estadoVelItem = SPEEDABLE.NORMAL;
+		estadoVelItem = Speedable.NORMAL;
 		
 	}
 
 	@Override
 	public void ralentizar() {
-		estadoVelItem = SPEEDABLE.LENTO;
+		this.estadoVelItem = Speedable.LENTO;
 	}
 }
