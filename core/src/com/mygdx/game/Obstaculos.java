@@ -13,6 +13,7 @@ public class Obstaculos extends Objetos implements SPEEDABLE{
 	private Array<Integer> obstaculosType;
 	private Texture obstacle1, obstacle2, obstacle3;
 	private long lastObstacleTime;
+	private int estadoVelObs = NORMAL;
 	
 	//Constructor de la clase
 	public Obstaculos(Texture ob1, Texture ob2, Texture ob3){
@@ -67,6 +68,14 @@ public class Obstaculos extends Objetos implements SPEEDABLE{
 		// revisar si las gotas cayeron al suelo o chocaron con el tarro
 		for (int i = 0; i < obstaculosPos.size; i++) {
 			Rectangle obstacle = obstaculosPos.get(i);
+			if(estadoVelObs != NORMAL) {
+				velY = 200;
+			    estadoVelObs -= Gdx.graphics.getDeltaTime();
+			}
+			else {
+			    normalizar();
+			    velY = 400;
+			}
 			obstacle.y -= velY * Gdx.graphics.getDeltaTime();
 			//cae al suelo y se elimina
 			if (obstacle.y + 64 < 0) {
@@ -106,13 +115,12 @@ public class Obstaculos extends Objetos implements SPEEDABLE{
 
 	@Override
 	public void normalizar() {
-		// TODO Auto-generated method stub
+		estadoVelObs = SPEEDABLE.NORMAL;
 		
 	}
 
 	@Override
 	public void ralentizar() {
-		// TODO Auto-generated method stub
-		
+		estadoVelObs = SPEEDABLE.LENTO;
 	}
 }

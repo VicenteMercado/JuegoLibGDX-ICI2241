@@ -18,6 +18,7 @@ public class Items extends Objetos implements SPEEDABLE{
 	private Sound soundEscudo;
 	private Texture itemRalent;
 	private Sound soundRalent;
+	private int estadoVelItem = NORMAL;
 	
 	public Items(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) {
 		this.itemEscudo = itemEscudo;
@@ -58,6 +59,14 @@ public class Items extends Objetos implements SPEEDABLE{
 		
 		for(int i = 0; i < itemPos.size; i++) {
 			Rectangle item = itemPos.get(i);
+			if(estadoVelItem != NORMAL) {
+				velY = 200;
+			    estadoVelItem -= Gdx.graphics.getDeltaTime();
+			}
+			else {
+			    normalizar();
+			    velY = 400;
+			}
 			item.y -=velY * Gdx.graphics.getDeltaTime();
 			//Si sale de la parte inferior de la pantalla, se elimina.
 			if (item.y + 64 < 0) {
@@ -77,7 +86,7 @@ public class Items extends Objetos implements SPEEDABLE{
 					 soundRalent.play();
 			         itemPos.removeIndex(i);
 			         itemType.removeIndex(i);
-			         //auto.setRalentizador(5);
+			         ralentizar();
 				 }
 		    }
 		      
@@ -106,13 +115,12 @@ public class Items extends Objetos implements SPEEDABLE{
 
 	@Override
 	public void normalizar() {
-		// TODO Auto-generated method stub
+		estadoVelItem = SPEEDABLE.NORMAL;
 		
 	}
 
 	@Override
 	public void ralentizar() {
-		// TODO Auto-generated method stub
-		
+		estadoVelItem = SPEEDABLE.LENTO;
 	}
 }
