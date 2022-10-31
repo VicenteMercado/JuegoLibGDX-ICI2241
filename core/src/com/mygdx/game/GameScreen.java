@@ -7,10 +7,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
 	final GameVehiculo game;
@@ -25,7 +23,8 @@ public class GameScreen implements Screen {
 	private float yBG, timeState;
 	private int bgSpeed = 400;
 	private Music music;
-
+	
+	//Constructor de la clase
 	public GameScreen(final GameVehiculo game) {
 		this.game = game;
         this.batch = game.getBatch();
@@ -96,8 +95,9 @@ public class GameScreen implements Screen {
 		if (yBG + 600 <= 0) {
 			yBG = 0;
 		}
-		
+	
 		batch.begin();
+		//se dibujan los fondos
 		batch.draw(background1,0,yBG);
 		batch.draw(background2,0,yBG+600);
 		//dibujar textos
@@ -120,9 +120,11 @@ public class GameScreen implements Screen {
 	       }
 		}
 		
+		//Actualizar dibujos de los objetos en pantalla
 		auto.dibujar(batch);
 		obstacles.actualizarDibujoObjeto(batch);
 		items.actualizarDibujoObjeto(batch);
+		//ir aumentando puntaje de acuerdo al tiempo
 		timeState+=Gdx.graphics.getDeltaTime();
 		if (timeState > 0.1f)
 			auto.sumarPuntos(1);
@@ -135,7 +137,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
-	  // continuar con sonido de lluvia
+	  // continuar con música
 	  music.play();
 	  music.setVolume(0.40f);
 	}
@@ -147,6 +149,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void pause() {
+		//pausa del juego
 		music.stop();
 		game.setScreen(new PausaScreen(game, this)); 
 	}
@@ -158,6 +161,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		//se destruyen cada variable al cerrar el juego
       auto.destruir();
       obstacles.destruir();
       items.destruir();

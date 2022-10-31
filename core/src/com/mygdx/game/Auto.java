@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 
 public class Auto {
+	//Variables de instancia
 	   private Rectangle car;
 	   private Texture carImage;
 	   private Sound sonidoHerido;
@@ -22,11 +23,13 @@ public class Auto {
 	   private float invencible = 0;
 	   
 	   
+	   //Constructor de la clase
 	   public Auto(Texture tex, Sound ss) {
 		   carImage = tex;
 		   sonidoHerido = ss;
 	   }
-	   
+	   	
+	   	//Setters y getters para diferentes valores
 		public int getVidas() {
 			return vidas;
 		}
@@ -37,6 +40,7 @@ public class Auto {
 		public Rectangle getArea() {
 			return car;
 		}
+		//Sumador de puntos
 		public void sumarPuntos(long pp) {
 			puntos+=pp;
 		}
@@ -50,7 +54,8 @@ public class Auto {
 			
 		}
 		
-	
+		
+		//Se crea el auto en pantalla
 		public void crear() {
 		      car = new Rectangle();
 		      car.x = 800 / 2 - 64 / 2;
@@ -58,16 +63,19 @@ public class Auto {
 		      car.width = 54;
 		      car.height = 96;
 		}
+		
 		public void dañar() {
-		  if(invencible <= 0) {
+		  if(invencible <= 0) { //Si el auto no es invencible, si éste se daña pierde una vida y detiene a los objetos por unos momentos
 			  vidas--;
 			  herido = true;
 			  tiempoHerido=tiempoHeridoMax;
 			  sonidoHerido.play(0.15f);
 		  }
 		}
+		
+		//dibuja al auto
 		public void dibujar(SpriteBatch batch) {
-		 if(invencible > 0) {
+		 if(invencible > 0) { //si es invencible, se dibuja el auto de color verde
 			 invencible -= Gdx.graphics.getDeltaTime();
 			 
 			 float f = (System.currentTimeMillis()%100)/100;
@@ -78,7 +86,7 @@ public class Auto {
 		 else {
 			 if (!herido)  
 				   batch.draw(carImage, car.x, car.y);
-				 else {
+				 else { //si el auto está herido se agita por unos momentos
 				   batch.draw(carImage, car.x, car.y+ MathUtils.random(-5,5));
 				   tiempoHerido--;
 				   if (tiempoHerido<=0) herido = false;
@@ -97,11 +105,12 @@ public class Auto {
 		}
 	    
 
-		public void destruir() {
+		public void destruir() { //se destruyen las variables al terminar el juego
 		    carImage.dispose();
+		    sonidoHerido.dispose();
 		}
 	
-		public boolean estaHerido() {
+		public boolean estaHerido() { //validador de si el auto está herido. Utilizado en dañar
 		   return herido;
 		}
 }

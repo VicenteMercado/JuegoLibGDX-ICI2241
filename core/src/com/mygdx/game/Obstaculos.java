@@ -36,21 +36,21 @@ public class Obstaculos extends Objetos implements Speedable{
 		obstaculo.x = MathUtils.random(135, 675-64);
 		obstaculo.y = 480;
 		int tipo = MathUtils.random(1,3); //se diferencia entre cada obstáculo
-		if (tipo == 1) {
+		if (tipo == 1) { //basurero
 			obstaculo.width = 45;
 			obstaculo.height = 64;
 			obstaculosPos.add(obstaculo);
 			obstaculosType.add(1);
 		}
 		
-		if (tipo == 2) {
+		if (tipo == 2) { //escombros
 			obstaculo.width = 86;
 			obstaculo.height = 64;
 			obstaculosPos.add(obstaculo);
 			obstaculosType.add(2);
 		}
 		
-		if (tipo == 3) {
+		if (tipo == 3) { //neúmatico
 			obstaculo.width = 50;
 			obstaculo.height = 50;
 			obstaculosPos.add(obstaculo);
@@ -65,14 +65,15 @@ public class Obstaculos extends Objetos implements Speedable{
 		//generar obstaculo
 		if (TimeUtils.nanoTime() - lastObstacleTime > 500000000) crearObjeto();
 		
-		// revisar si las gotas cayeron al suelo o chocaron con el tarro
+		// revisar si los obstáculos cayeron al suelo o chocaron con el auto
 		for (int i = 0; i < obstaculosPos.size; i++) {
 			Rectangle obstacle = obstaculosPos.get(i);
-			if(estadoVelObs > NORMAL) {
+			if(estadoVelObs > NORMAL) { //si el auto chocó con el item "ralentizar" la velocidad de los obstaculos disminuye
+										//durante un tiempo
 				velY = 200;
 			    estadoVelObs -= Gdx.graphics.getDeltaTime();
 			}
-			else {
+			else { //cuando se acabe el efecto, la velocidad vuelve a la normalidad
 			    normalizar();
 			    velY = 400;
 			}
@@ -84,7 +85,7 @@ public class Obstaculos extends Objetos implements Speedable{
 			}
 			if (obstacle.overlaps(auto.getArea())) { //si toca la hitbox del auto
 				auto.dañar();
-				if (auto.getVidas() <= 0)
+				if (auto.getVidas() <= 0) //fin del juego
 					return false;
 				obstaculosPos.removeIndex(i);
 				obstaculosType.removeIndex(i);
@@ -115,11 +116,13 @@ public class Obstaculos extends Objetos implements Speedable{
 
 	@Override
 	public void normalizar() {
+		//se normaliza la velocidad de los obstáculos
 		estadoVelObs = Speedable.NORMAL;
 	}
 
 	@Override
 	public void ralentizar() {
+		//se ralentiza la velocidad de los obstáculos
 		estadoVelObs = Speedable.LENTO;
 	}
 }
