@@ -14,7 +14,7 @@ public class Item extends Objeto implements Speedable{
 	private long lastItemTime; //Tiempo de creación del item anterior.
 	private Array<Integer> itemType; //Arreglo de tipos de item generados.
 	private Array<Rectangle> itemPos; //Arreglo de posiciones de items generados.
-	private float estadoVelItem = NORMAL; //Verificador de velocidad de desplazamientos de items.
+	private float estadoVelItem = 0; //Verificador de velocidad de desplazamientos de items.
 	
 	//Constructor
 	public Item() {
@@ -74,7 +74,7 @@ public class Item extends Objeto implements Speedable{
 		
 		for(int i = 0; i < itemPos.size; i++) {
 			Rectangle item = itemPos.get(i); //Se toman los items en pantalla.
-			if(estadoVelItem > NORMAL) { //Si el efecto del item Ralentizar está en efecto, se reduce velocidad de desplazamiento del item.
+			if(estadoVelItem > 0) { //Si el efecto del item Ralentizar está en efecto, se reduce velocidad de desplazamiento del item.
 				velY = 200;
 			    estadoVelItem -= Gdx.graphics.getDeltaTime(); //Disminuye duración del efecto hasta llegar a 0.
 			}
@@ -141,11 +141,11 @@ public class Item extends Objeto implements Speedable{
 
 	@Override
 	public void normalizar() { //Se pone la velocidad de los items a la estándar.
-		this.estadoVelItem = Speedable.NORMAL;
+		this.estadoVelItem = 0;
 	}
 
 	@Override
 	public void ralentizar() { //Se ralentiza la velocidad de los items.
-		this.estadoVelItem = Speedable.LENTO;
+		this.estadoVelItem = 15;
 	}
 }

@@ -14,7 +14,7 @@ public class Obstaculo extends Objeto implements Speedable{
 	private Array<Integer> obstaculosType;
 	private Texture obstacle1, obstacle2, obstacle3;
 	private long lastObstacleTime;
-	private float estadoVelObs = NORMAL;
+	private float estadoVelObs = 0;
 	
 	//Constructor de la clase
 	public Obstaculo(Texture ob1, Texture ob2, Texture ob3){
@@ -69,7 +69,7 @@ public class Obstaculo extends Objeto implements Speedable{
 		// revisar si los obstáculos cayeron al suelo o chocaron con el auto
 		for (int i = 0; i < obstaculosPos.size; i++) {
 			Rectangle obstacle = obstaculosPos.get(i);
-			if(estadoVelObs > NORMAL) { //si el auto chocó con el item "ralentizar" la velocidad de los obstaculos disminuye
+			if(estadoVelObs > 0) { //si el auto chocó con el item "ralentizar" la velocidad de los obstaculos disminuye
 										//durante un tiempo
 				velY = 200;
 			    estadoVelObs -= Gdx.graphics.getDeltaTime();
@@ -118,12 +118,12 @@ public class Obstaculo extends Objeto implements Speedable{
 	@Override
 	public void normalizar() {
 		//se normaliza la velocidad de los obstáculos
-		estadoVelObs = Speedable.NORMAL;
+		estadoVelObs = 0;
 	}
 
 	@Override
 	public void ralentizar() {
 		//se ralentiza la velocidad de los obstáculos
-		estadoVelObs = Speedable.LENTO;
+		estadoVelObs = 15;
 	}
 }
