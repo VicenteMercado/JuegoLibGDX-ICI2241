@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.obj;
 
 import com.badlogic.gdx.Gdx; 
 import com.badlogic.gdx.audio.Sound;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.itfc.Speedable;
 
 public class Item extends Objeto implements Speedable{
 	private long lastItemTime; //Tiempo de creación del item anterior.

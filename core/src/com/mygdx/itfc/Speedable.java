@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.itfc;
 
 enum Constantes{
 	NORMAL(0), LENTO(15);

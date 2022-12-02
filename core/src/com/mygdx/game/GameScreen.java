@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.obj.Auto;
+import com.mygdx.obj.Item;
+import com.mygdx.obj.Objeto;
+import com.mygdx.obj.Obstaculo;
 
 public class GameScreen implements Screen {
 	final GameVehiculo game;

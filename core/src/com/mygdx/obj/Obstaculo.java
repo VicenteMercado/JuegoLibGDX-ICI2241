@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.obj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.itfc.Speedable;
 
 public class Obstaculo extends Objeto implements Speedable{
 	private Array<Rectangle> obstaculosPos;
