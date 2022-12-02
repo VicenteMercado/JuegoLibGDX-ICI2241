@@ -14,25 +14,14 @@ public class Item extends Objeto implements Speedable{
 	private long lastItemTime; //Tiempo de creación del item anterior.
 	private Array<Integer> itemType; //Arreglo de tipos de item generados.
 	private Array<Rectangle> itemPos; //Arreglo de posiciones de items generados.
-	//private Texture itemEscudo; 
-	//private Sound soundEscudo; //Textura y sonido de item Escudo.
-	//private Texture itemRalent;
-	//private Sound soundRalent; //Textura y sonido de item Ralentizador.
 	private float estadoVelItem = NORMAL; //Verificador de velocidad de desplazamientos de items.
 	
+	//Constructor
 	public Item() {
 		velY = 400;
 	}
 	
-	/*public Item(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) { //Constructor.
-		this.itemEscudo = itemEscudo;
-		this.itemRalent = itemRalent;
-		this.soundEscudo = soundEscudo;
-		this.soundRalent = soundRalent;
-		velY = 400;
-	}
-	*/
-	
+	//método que crea el item de acuerdo al entero recibido. sigue el patrón builder
 	public TipoDeItem makeItem(int i) {
 		TipoDeItem IT = new TipoDeItem();
 		Director director = new Director();
@@ -129,9 +118,8 @@ public class Item extends Objeto implements Speedable{
 	}
 
 	@Override
-	public void destruir() { //Si el juego se cierra, se eliminan los archivos de los items.
-		//soundEscudo.dispose();
-		//soundRalent.dispose();
+	public void destruir() {
+
 	}
 
 	@Override
@@ -153,8 +141,7 @@ public class Item extends Objeto implements Speedable{
 
 	@Override
 	public void normalizar() { //Se pone la velocidad de los items a la estándar.
-		estadoVelItem = Speedable.NORMAL;
-		
+		this.estadoVelItem = Speedable.NORMAL;
 	}
 
 	@Override

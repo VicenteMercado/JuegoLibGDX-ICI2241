@@ -69,11 +69,7 @@ public class GameScreen implements Screen {
 		 Texture obstacle3 = new Texture(Gdx.files.internal("obstacle3.png"));
 		 obstacles = new Obstaculo(obstacle1, obstacle2, obstacle3);
 		 
-		 //Carga de texturas de items y sonidos de efecto.
-		 //Texture item1 = new Texture(Gdx.files.internal("item1.jpg"));
-		 //Texture item2 = new Texture(Gdx.files.internal("item2.png"));
-		 //Sound soundEscudo = Gdx.audio.newSound(Gdx.files.internal("soundEscudo.ogg"));
-		 //Sound soundRalent = Gdx.audio.newSound(Gdx.files.internal("soundRalent.mp3"));
+		 //Inicialización de items
 		 items = new Item();
          
          // carga de fondo

@@ -23,4 +23,9 @@ public class TipoDeItem {
 		this.sound = sound;
 	}
 	
+	public void bombardear() {
+		this.textura.dispose();
+		this.sound.dispose();
+	}
+	
 }
