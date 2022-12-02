@@ -61,7 +61,7 @@ public class Obstaculo extends Objeto implements Speedable{
 	}
 
 	@Override
-	public boolean actualizarMovimiento(Auto auto, Obstaculo o) {
+	public boolean actualizarMovimiento(Auto auto, Objeto o) {
 		//generar obstaculo
 		if (TimeUtils.nanoTime() - lastObstacleTime > 500000000) crearObjeto();
 		

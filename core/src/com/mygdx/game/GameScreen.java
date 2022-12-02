@@ -16,8 +16,8 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private Auto auto;
-	private Obstaculo obstacles;
-	private Item items;
+	private Objeto obstacles;
+	private Objeto items;
 	private Texture background1;
 	private Texture background2;
 	private float yBG, timeState;
@@ -43,11 +43,8 @@ public class GameScreen implements Screen {
 	    camera = new OrthographicCamera();
 	    camera.setToOrtho(false, 800, 480);
 	    batch = new SpriteBatch();
-	    // creacion del tarro
+	    // creacion del auto
 	    auto.crear();
-	      
-	    // creacion de la lluvia
-	    //lluvia.crear();
 	    
 	    // creacion de los obstaculos
 	    obstacles.crear();

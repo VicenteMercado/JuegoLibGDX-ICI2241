@@ -55,7 +55,7 @@ public class Item extends Objeto implements Speedable{
 	}
 
 	@Override
-	public boolean actualizarMovimiento(Auto auto, Obstaculo o) {
+	public boolean actualizarMovimiento(Auto auto, Objeto o) {
 		//Generar un item.
 		if(TimeUtils.nanoTime() - lastItemTime > 10000000000.0f) //Tras 10 segundos desde la aparición del último item, se genera el siguiente.
 			crearObjeto();
@@ -68,7 +68,7 @@ public class Item extends Objeto implements Speedable{
 			}
 			else { 
 			    normalizar();
-			    o.normalizar();
+			    ((Obstaculo) o).normalizar();
 			    velY = 400;
 			}
 			item.y -=velY * Gdx.graphics.getDeltaTime(); //El item va "cayendo" en la pantalla.
@@ -92,7 +92,7 @@ public class Item extends Objeto implements Speedable{
 					 soundRalent.play();
 			         itemPos.removeIndex(i); //Se elimina el item.
 			         itemType.removeIndex(i);
-			         o.ralentizar(); //Se ralentizan obstáculos.
+			         ((Obstaculo) o).ralentizar(); //Se ralentizan obstáculos.
 			         ralentizar(); //Se ralentizan items.
 				 }
 		    }
