@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.itfc.Builder;
 
 public class ItemBuilder implements Builder {
-	private ItemType IT;
+	private TipoDeItem IT;
 	
 	public ItemBuilder(){
 		this.reset();
@@ -13,7 +13,7 @@ public class ItemBuilder implements Builder {
 	
 	@Override
 	public void reset() {
-		this.IT = new ItemType();
+		this.IT = new TipoDeItem();
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class ItemBuilder implements Builder {
 		
 	}
 	
-	public ItemType getProducto() {
-		ItemType producto = this.IT;
+	public TipoDeItem getProducto() {
+		TipoDeItem producto = this.IT;
 		this.reset();
 		return producto;
 	}

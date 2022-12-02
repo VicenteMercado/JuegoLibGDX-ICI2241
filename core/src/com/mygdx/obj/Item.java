@@ -14,10 +14,10 @@ public class Item extends Objeto implements Speedable{
 	private long lastItemTime; //Tiempo de creación del item anterior.
 	private Array<Integer> itemType; //Arreglo de tipos de item generados.
 	private Array<Rectangle> itemPos; //Arreglo de posiciones de items generados.
-	private Texture itemEscudo; 
-	private Sound soundEscudo; //Textura y sonido de item Escudo.
-	private Texture itemRalent;
-	private Sound soundRalent; //Textura y sonido de item Ralentizador.
+	//private Texture itemEscudo; 
+	//private Sound soundEscudo; //Textura y sonido de item Escudo.
+	//private Texture itemRalent;
+	//private Sound soundRalent; //Textura y sonido de item Ralentizador.
 	private float estadoVelItem = NORMAL; //Verificador de velocidad de desplazamientos de items.
 	
 	public Item() {
@@ -33,8 +33,8 @@ public class Item extends Objeto implements Speedable{
 	}
 	*/
 	
-	public ItemType makeItem(int i) {
-		ItemType IT = new ItemType();
+	public TipoDeItem makeItem(int i) {
+		TipoDeItem IT = new TipoDeItem();
 		Director director = new Director();
 		ItemBuilder builder = new ItemBuilder();
 		
@@ -106,7 +106,7 @@ public class Item extends Objeto implements Speedable{
 			if(item.overlaps(auto.getArea())) {
 		    	 // Se recolecta el item, se activa y se reproduce su sonido.
 				 if(itemType.get(i)==1) { //Modo escudo
-					 ItemType it = makeItem(1);
+					 TipoDeItem it = makeItem(1);
 					 it.getSound().play();
 					 //soundEscudo.play();
 			         itemPos.removeIndex(i); //Se elimina el item.
@@ -114,7 +114,7 @@ public class Item extends Objeto implements Speedable{
 			         auto.setInvencible(5); //Se inician 5 segundos de total invencibilidad.
 				 }
 				 else{ //Modo ralentizador
-					 ItemType it = makeItem(2);
+					 TipoDeItem it = makeItem(2);
 					 it.getSound().play();
 					 //soundRalent.play();
 			         itemPos.removeIndex(i); //Se elimina el item.
@@ -140,11 +140,11 @@ public class Item extends Objeto implements Speedable{
 		for (int i = 0; i < itemPos.size; i++) {
 			Rectangle item = itemPos.get(i);
 			if (itemType.get(i) == 1) {//Textura de escudo
-				ItemType IT = makeItem(1);
+				TipoDeItem IT = makeItem(1);
 				batch.draw(IT.getTexture(), item.x, item.y);
 			}
 			if (itemType.get(i) == 2) { //Textura de ralentizador
-				ItemType IT = makeItem(2);
+				TipoDeItem IT = makeItem(2);
 			    batch.draw(IT.getTexture(), item.x, item.y);
 			}
 		}

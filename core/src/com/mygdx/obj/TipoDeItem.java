@@ -3,7 +3,7 @@ package com.mygdx.obj;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-public class ItemType {
+public class TipoDeItem {
 	private Texture textura;
 	private Sound sound;
 	
