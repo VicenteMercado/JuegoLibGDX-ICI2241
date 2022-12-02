@@ -20,12 +20,34 @@ public class Item extends Objeto implements Speedable{
 	private Sound soundRalent; //Textura y sonido de item Ralentizador.
 	private float estadoVelItem = NORMAL; //Verificador de velocidad de desplazamientos de items.
 	
-	public Item(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) { //Constructor.
+	public Item() {
+		velY = 400;
+	}
+	
+	/*public Item(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) { //Constructor.
 		this.itemEscudo = itemEscudo;
 		this.itemRalent = itemRalent;
 		this.soundEscudo = soundEscudo;
 		this.soundRalent = soundRalent;
 		velY = 400;
+	}
+	*/
+	
+	public ItemType makeItem(int i) {
+		ItemType IT = new ItemType();
+		Director director = new Director();
+		ItemBuilder builder = new ItemBuilder();
+		
+		if(i==1) {
+			director.crearEscudo(builder);
+			IT = builder.getProducto();
+		}
+		if(i==2) {
+			director.crearRalentizador(builder);
+			IT = builder.getProducto();
+		}
+		
+		return IT;
 	}
 	
 	public float getEstado() { //Retorna el estado de la velocidad de los items.
@@ -84,13 +106,17 @@ public class Item extends Objeto implements Speedable{
 			if(item.overlaps(auto.getArea())) {
 		    	 // Se recolecta el item, se activa y se reproduce su sonido.
 				 if(itemType.get(i)==1) { //Modo escudo
-					 soundEscudo.play();
+					 ItemType it = makeItem(1);
+					 it.getSound().play();
+					 //soundEscudo.play();
 			         itemPos.removeIndex(i); //Se elimina el item.
 			         itemType.removeIndex(i);
 			         auto.setInvencible(5); //Se inician 5 segundos de total invencibilidad.
 				 }
 				 else{ //Modo ralentizador
-					 soundRalent.play();
+					 ItemType it = makeItem(2);
+					 it.getSound().play();
+					 //soundRalent.play();
 			         itemPos.removeIndex(i); //Se elimina el item.
 			         itemType.removeIndex(i);
 			         ((Obstaculo) o).ralentizar(); //Se ralentizan obstáculos.
@@ -104,8 +130,8 @@ public class Item extends Objeto implements Speedable{
 
 	@Override
 	public void destruir() { //Si el juego se cierra, se eliminan los archivos de los items.
-		soundEscudo.dispose();
-		soundRalent.dispose();
+		//soundEscudo.dispose();
+		//soundRalent.dispose();
 	}
 
 	@Override
@@ -113,10 +139,14 @@ public class Item extends Objeto implements Speedable{
 		//se dibuja la textura del item dependiendo de cuál toque
 		for (int i = 0; i < itemPos.size; i++) {
 			Rectangle item = itemPos.get(i);
-			if (itemType.get(i) == 1) //Textura de escudo
-				batch.draw(itemEscudo, item.x, item.y);
-			if (itemType.get(i) == 2) //Textura de ralentizador
-				batch.draw(itemRalent, item.x, item.y);
+			if (itemType.get(i) == 1) {//Textura de escudo
+				ItemType IT = makeItem(1);
+				batch.draw(IT.getTexture(), item.x, item.y);
+			}
+			if (itemType.get(i) == 2) { //Textura de ralentizador
+				ItemType IT = makeItem(2);
+			    batch.draw(IT.getTexture(), item.x, item.y);
+			}
 		}
 		
 	}
