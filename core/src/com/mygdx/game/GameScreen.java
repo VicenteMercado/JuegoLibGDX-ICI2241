@@ -15,7 +15,7 @@ import com.mygdx.obj.Objeto;
 import com.mygdx.obj.Obstaculo;
 
 public class GameScreen implements Screen {
-	final GameVehiculo game;
+	private final GameVehiculo game;
     private OrthographicCamera camera;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
@@ -115,8 +115,9 @@ public class GameScreen implements Screen {
 	    	  //actualizar HigherScore
 	    	  if (game.getHigherScore()<auto.getPuntos())
 	    		  game.setHigherScore(auto.getPuntos());  
-	    	  //ir a la ventana de finde juego y destruir la actual
-	    	  game.setScreen(new GameOverScreen(game));
+	    	  //ir a la ventana de finde juego y destruir la actual (se aplica patrón singleton)
+	    	  GameOverScreen over = GameOverScreen.getInstancia(game);
+	    	  game.setScreen(over);
 	    	  dispose();
 	       }
 		}

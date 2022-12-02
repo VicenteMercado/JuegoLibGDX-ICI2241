@@ -10,22 +10,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameOverScreen implements Screen {
+	private static GameOverScreen instancia;
 	private final GameVehiculo game;
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private OrthographicCamera camera;
 	private Music music;
-
-	public GameOverScreen(final GameVehiculo game) {
+	
+	//constructor en privado para seguir el patrón singleton.
+	private GameOverScreen(final GameVehiculo game) {
 		this.game = game;
         this.batch = game.getBatch();
         this.font = game.getFont();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 		this.music = Gdx.audio.newMusic(Gdx.files.internal("gameover.mp3"));
-		music.setLooping(false);
-		music.play();
-		music.setVolume(0.40f);
+	}
+	
+	//obtiene la instancia sin necesidad de volver a crear una si ésta ya existe.
+	public static GameOverScreen getInstancia(final GameVehiculo game){
+		if (instancia == null)
+			instancia = new GameOverScreen(game);
+		return instancia;
 	}
 
 	@Override
@@ -35,6 +41,9 @@ public class GameOverScreen implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
+		music.setLooping(false);
+		music.play();
+		music.setVolume(0.40f);
 		font.draw(batch, "GAME OVER! ", 100, 200);
 		font.draw(batch, "Pulsa ESPACIO para reiniciar.", 100, 100);
 		batch.end();
