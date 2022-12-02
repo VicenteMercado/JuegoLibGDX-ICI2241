@@ -1,5 +1,13 @@
 package com.mygdx.game;
 
+enum Constantes{
+	NORMAL(0), LENTO(15);
+
+	Constantes(int i) {
+		// TODO Auto-generated constructor stub
+	}
+}
+
 public interface Speedable { //Interfaz que maneja la velocidad del juego.
   public static final float NORMAL= 0; //Velocidad normal.
   public static final float LENTO = 15; //Velocidad reducida, activada por item Ralentizador.
