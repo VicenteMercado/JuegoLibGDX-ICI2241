@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Items extends Objetos implements Speedable{
+public class Item extends Objeto implements Speedable{
 	private long lastItemTime; //Tiempo de creación del item anterior.
 	private Array<Integer> itemType; //Arreglo de tipos de item generados.
 	private Array<Rectangle> itemPos; //Arreglo de posiciones de items generados.
@@ -19,7 +19,7 @@ public class Items extends Objetos implements Speedable{
 	private Sound soundRalent; //Textura y sonido de item Ralentizador.
 	private float estadoVelItem = NORMAL; //Verificador de velocidad de desplazamientos de items.
 	
-	public Items(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) { //Constructor.
+	public Item(Texture itemEscudo, Texture itemRalent, Sound soundEscudo, Sound soundRalent) { //Constructor.
 		this.itemEscudo = itemEscudo;
 		this.itemRalent = itemRalent;
 		this.soundEscudo = soundEscudo;
@@ -55,7 +55,7 @@ public class Items extends Objetos implements Speedable{
 	}
 
 	@Override
-	public boolean actualizarMovimiento(Auto auto, Obstaculos o) {
+	public boolean actualizarMovimiento(Auto auto, Obstaculo o) {
 		//Generar un item.
 		if(TimeUtils.nanoTime() - lastItemTime > 10000000000.0f) //Tras 10 segundos desde la aparición del último item, se genera el siguiente.
 			crearObjeto();

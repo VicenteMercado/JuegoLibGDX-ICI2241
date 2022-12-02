@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Obstaculos extends Objetos implements Speedable{
+public class Obstaculo extends Objeto implements Speedable{
 	private Array<Rectangle> obstaculosPos;
 	private Array<Integer> obstaculosType;
 	private Texture obstacle1, obstacle2, obstacle3;
@@ -16,7 +16,7 @@ public class Obstaculos extends Objetos implements Speedable{
 	private float estadoVelObs = NORMAL;
 	
 	//Constructor de la clase
-	public Obstaculos(Texture ob1, Texture ob2, Texture ob3){
+	public Obstaculo(Texture ob1, Texture ob2, Texture ob3){
 		velY = 400;
 		this.obstacle1 = ob1;
 		this.obstacle2 = ob2;
@@ -61,7 +61,7 @@ public class Obstaculos extends Objetos implements Speedable{
 	}
 
 	@Override
-	public boolean actualizarMovimiento(Auto auto, Obstaculos o) {
+	public boolean actualizarMovimiento(Auto auto, Obstaculo o) {
 		//generar obstaculo
 		if (TimeUtils.nanoTime() - lastObstacleTime > 500000000) crearObjeto();
 		

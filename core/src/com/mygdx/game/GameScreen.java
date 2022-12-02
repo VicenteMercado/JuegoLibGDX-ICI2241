@@ -16,8 +16,8 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;	   
 	private BitmapFont font;
 	private Auto auto;
-	private Obstaculos obstacles;
-	private Items items;
+	private Obstaculo obstacles;
+	private Item items;
 	private Texture background1;
 	private Texture background2;
 	private float yBG, timeState;
@@ -66,14 +66,14 @@ public class GameScreen implements Screen {
 		 Texture obstacle1 = new Texture(Gdx.files.internal("obstacle1.png"));
 		 Texture obstacle2 = new Texture(Gdx.files.internal("obstacle2.png"));
 		 Texture obstacle3 = new Texture(Gdx.files.internal("obstacle3.png"));
-		 obstacles = new Obstaculos(obstacle1, obstacle2, obstacle3);
+		 obstacles = new Obstaculo(obstacle1, obstacle2, obstacle3);
 		 
 		 //Carga de texturas de items y sonidos de efecto.
 		 Texture item1 = new Texture(Gdx.files.internal("item1.jpg"));
 		 Texture item2 = new Texture(Gdx.files.internal("item2.png"));
 		 Sound soundEscudo = Gdx.audio.newSound(Gdx.files.internal("soundEscudo.ogg"));
 		 Sound soundRalent = Gdx.audio.newSound(Gdx.files.internal("soundRalent.mp3"));
-		 items = new Items(item1,item2,soundEscudo,soundRalent);
+		 items = new Item(item1,item2,soundEscudo,soundRalent);
          
          // carga de fondo
          background1 = new Texture(Gdx.files.internal("backgroundDLC.png"));
