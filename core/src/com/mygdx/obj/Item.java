@@ -9,8 +9,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.itfc.Speedable;
+import com.mygdx.itfc.Strategy;
 
 public class Item extends Objeto implements Speedable {
+	private Velocidad velocidad; //Actualización de velocidad (patrón Strategy)
 	private long lastItemTime; // Tiempo de creación del item anterior.
 	private Array<Integer> itemType; // Arreglo de tipos de item generados.
 	private Array<Rectangle> itemPos; // Arreglo de posiciones de items generados.
@@ -78,13 +80,16 @@ public class Item extends Objeto implements Speedable {
 			Rectangle item = itemPos.get(i); // Se toman los items en pantalla.
 			if (estadoVelItem > 0) { // Si el efecto del item Ralentizar está en efecto, se reduce velocidad de
 										// desplazamiento del item.
-				velY = 200;
+				velocidad = new Velocidad(new VLenta()); 
 				estadoVelItem -= Gdx.graphics.getDeltaTime(); // Disminuye duración del efecto hasta llegar a 0.
 			} else {
 				normalizar();
+				velocidad = new Velocidad(new VNormal());
 				((Obstaculo) o).normalizar();
-				velY = 400;
 			}
+
+			velY = velocidad.executeStrategy(); //Se actualiza la velocidad del juego dependiendo
+			                                    //del efecto activo de Ralentizador.
 			item.y -= velY * Gdx.graphics.getDeltaTime(); // El item va "cayendo" en la pantalla.
 
 			// Si sale de la parte inferior de la pantalla, se elimina.
