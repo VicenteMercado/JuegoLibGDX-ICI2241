@@ -6,11 +6,11 @@ import com.mygdx.itfc.Builder;
 
 public class ItemBuilder implements Builder {
 	private TipoDeItem IT;
-	
-	public ItemBuilder(){
+
+	public ItemBuilder() {
 		this.reset();
 	}
-	
+
 	@Override
 	public void reset() {
 		this.IT = new TipoDeItem();
@@ -24,13 +24,13 @@ public class ItemBuilder implements Builder {
 	@Override
 	public void setSonido(Sound ss) {
 		IT.setSound(ss);
-		
+
 	}
-	
+
 	public TipoDeItem getProducto() {
 		TipoDeItem producto = this.IT;
 		this.reset();
 		return producto;
 	}
-	
+
 }
