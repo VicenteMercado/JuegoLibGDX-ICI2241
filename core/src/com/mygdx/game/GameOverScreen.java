@@ -49,7 +49,8 @@ public class GameOverScreen implements Screen {
 		batch.end();
 
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			game.setScreen(new GameScreen(game));
+			GameScreen g = new GameScreen(game);
+			game.setScreen(g.usarGameScreen(game));
 			dispose();
 		}
 	}

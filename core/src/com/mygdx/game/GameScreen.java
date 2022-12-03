@@ -14,7 +14,7 @@ import com.mygdx.obj.Item;
 import com.mygdx.obj.Objeto;
 import com.mygdx.obj.Obstaculo;
 
-public class GameScreen implements Screen {
+public class GameScreen extends PlantillaGameScreen implements Screen {
 	private final GameVehiculo game;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
@@ -33,13 +33,9 @@ public class GameScreen implements Screen {
 		this.game = game;
 		this.batch = game.getBatch();
 		this.font = game.getFont();
-
-		// Se cargan los assets
-		cargar();
-
 	}
 
-	private void cargar() {
+	public void cargarAssets() {
 		// carga la textura del auto y su sonido de daño
 		Sound hurtSound = Gdx.audio.newSound(Gdx.files.internal("hurt.wav"));
 		auto = new Auto(new Texture(Gdx.files.internal("car.png")), hurtSound);
@@ -58,11 +54,8 @@ public class GameScreen implements Screen {
 		background2 = new Texture(Gdx.files.internal("backgroundDLC.png"));
 		yBG = 0;
 
-		// Se inicializa música de fondo, se reproduce y modifica su volúmen.
+		// Se inicializa música de fondo,
 		this.music = Gdx.audio.newMusic(Gdx.files.internal("game_music.mp3"));
-		music.setLooping(true);
-		music.play();
-		music.setVolume(0.40f);
 
 		// camera
 		camera = new OrthographicCamera();
@@ -77,6 +70,13 @@ public class GameScreen implements Screen {
 
 		// Creación de los items.
 		items.crear();
+	}
+
+	public void reproducirMusica() {
+		// Se reproduce la música y se modifica su volúmen.
+		music.setLooping(true);
+		music.play();
+		music.setVolume(0.40f);
 	}
 
 	@Override
