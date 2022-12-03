@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-
 public class MainMenuScreen implements Screen {
 
 	private final GameVehiculo game;
@@ -17,8 +16,8 @@ public class MainMenuScreen implements Screen {
 
 	public MainMenuScreen(final GameVehiculo game) {
 		this.game = game;
-        this.batch = game.getBatch();
-        this.font = game.getFont();
+		this.batch = game.getBatch();
+		this.font = game.getFont();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 	}
@@ -32,8 +31,8 @@ public class MainMenuScreen implements Screen {
 
 		batch.begin();
 		font.getData().setScale(2, 2);
-		font.draw(batch, "WELCOME TO THE DANGER CAR", 100, camera.viewportHeight/2+50);
-		font.draw(batch, "Toca en cualquier lugar para comenzar!", 100, camera.viewportHeight/2-50);
+		font.draw(batch, "WELCOME TO THE DANGER CAR", 100, camera.viewportHeight / 2 + 50);
+		font.draw(batch, "Toca en cualquier lugar para comenzar!", 100, camera.viewportHeight / 2 - 50);
 
 		batch.end();
 
@@ -46,37 +45,37 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

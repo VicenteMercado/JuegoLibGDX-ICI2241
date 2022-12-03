@@ -7,20 +7,19 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-
 public class PausaScreen implements Screen {
 
 	private final GameVehiculo game;
 	private GameScreen juego;
-	private SpriteBatch batch;	   
+	private SpriteBatch batch;
 	private BitmapFont font;
 	private OrthographicCamera camera;
 
-	public PausaScreen (final GameVehiculo game, GameScreen juego) {
+	public PausaScreen(final GameVehiculo game, GameScreen juego) {
 		this.game = game;
-        this.juego = juego;
-        this.batch = game.getBatch();
-        this.font = game.getFont();
+		this.juego = juego;
+		this.batch = game.getBatch();
+		this.font = game.getFont();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 	}
@@ -46,38 +45,37 @@ public class PausaScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
-

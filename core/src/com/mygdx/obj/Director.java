@@ -6,17 +6,17 @@ import com.mygdx.itfc.Builder;
 
 public class Director {
 	private Builder builder;
-	
+
 	public Director() {
-		
+
 	}
-	
+
 	public void crearEscudo(Builder builder) {
 		builder.reset();
 		builder.setTextura(new Texture(Gdx.files.internal("item1.jpg")));
 		builder.setSonido(Gdx.audio.newSound(Gdx.files.internal("soundEscudo.ogg")));
 	}
-	
+
 	public void crearRalentizador(Builder builder) {
 		builder.reset();
 		builder.setTextura(new Texture(Gdx.files.internal("item2.png")));

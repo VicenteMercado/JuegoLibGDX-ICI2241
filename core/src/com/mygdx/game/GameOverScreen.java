@@ -12,23 +12,23 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class GameOverScreen implements Screen {
 	private static GameOverScreen instancia;
 	private final GameVehiculo game;
-	private SpriteBatch batch;	   
+	private SpriteBatch batch;
 	private BitmapFont font;
 	private OrthographicCamera camera;
 	private Music music;
-	
-	//constructor en privado para seguir el patrón singleton.
+
+	// constructor en privado para seguir el patrón singleton.
 	private GameOverScreen(final GameVehiculo game) {
 		this.game = game;
-        this.batch = game.getBatch();
-        this.font = game.getFont();
+		this.batch = game.getBatch();
+		this.font = game.getFont();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 480);
 		this.music = Gdx.audio.newMusic(Gdx.files.internal("gameover.mp3"));
 	}
-	
-	//obtiene la instancia sin necesidad de volver a crear una si ésta ya existe.
-	public static GameOverScreen getInstancia(final GameVehiculo game){
+
+	// obtiene la instancia sin necesidad de volver a crear una si ésta ya existe.
+	public static GameOverScreen getInstancia(final GameVehiculo game) {
 		if (instancia == null)
 			instancia = new GameOverScreen(game);
 		return instancia;
@@ -57,31 +57,31 @@ public class GameOverScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
